@@ -1,0 +1,41 @@
+import pandas as pd 
+import matplotlib.pyplot as plt
+
+#Running a Regressor
+from sklearn.linear_model import LinearRegression
+model = LinearRegression()
+
+#Importing local dataset for EDA
+df = pd.read_csv("file:///C:/Users/hp/Desktop/Dataset.csv")
+print(df)
+
+#Data Visualisation
+plt.scatter(df['Rate'],df['Premium'])
+plt.title("Rate Vs Premium")
+plt.xlabel("Rate")
+plt.ylabel("Premium")
+
+#Input - Rate
+x = df.iloc[0:6,0:1].values
+print(x)
+
+#Output - Premium
+y = df.iloc[:,1].values
+print(y) 
+
+#Fitting the Linear Regression Model 
+model.fit(x,y)
+
+#Predicting the Output 
+y_pred = model.predict(x)
+print(y_pred)
+
+#Individual Prediction
+print(model.predict([[2.5]]))
+
+# Cross Verification to check the accuracy of the model 
+m = model.coef_
+print(m)
+C = model.intercept_
+print(C)
+print(m*2.5 + C)
